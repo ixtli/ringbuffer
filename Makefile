@@ -102,17 +102,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named RingBuffer
+# Target rules for targets named ringbuffer
 
 # Build rule for target.
-RingBuffer: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 RingBuffer
-.PHONY : RingBuffer
+ringbuffer: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ringbuffer
+.PHONY : ringbuffer
 
 # fast build rule for target.
-RingBuffer/fast:
-	$(MAKE) -f src/CMakeFiles/RingBuffer.dir/build.make src/CMakeFiles/RingBuffer.dir/build
-.PHONY : RingBuffer/fast
+ringbuffer/fast:
+	$(MAKE) -f CMakeFiles/ringbuffer.dir/build.make CMakeFiles/ringbuffer.dir/build
+.PHONY : ringbuffer/fast
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/ringbuffer.dir/build.make CMakeFiles/ringbuffer.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/ringbuffer.dir/build.make CMakeFiles/ringbuffer.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/ringbuffer.dir/build.make CMakeFiles/ringbuffer.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -122,7 +146,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... RingBuffer"
+	@echo "... ringbuffer"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 
