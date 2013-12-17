@@ -138,6 +138,30 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/ringbuffer.dir/build.make CMakeFiles/ringbuffer.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/ringbuffer.o: src/ringbuffer.cpp.o
+.PHONY : src/ringbuffer.o
+
+# target to build an object file
+src/ringbuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/ringbuffer.dir/build.make CMakeFiles/ringbuffer.dir/src/ringbuffer.cpp.o
+.PHONY : src/ringbuffer.cpp.o
+
+src/ringbuffer.i: src/ringbuffer.cpp.i
+.PHONY : src/ringbuffer.i
+
+# target to preprocess a source file
+src/ringbuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/ringbuffer.dir/build.make CMakeFiles/ringbuffer.dir/src/ringbuffer.cpp.i
+.PHONY : src/ringbuffer.cpp.i
+
+src/ringbuffer.s: src/ringbuffer.cpp.s
+.PHONY : src/ringbuffer.s
+
+# target to generate assembly for a file
+src/ringbuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/ringbuffer.dir/build.make CMakeFiles/ringbuffer.dir/src/ringbuffer.cpp.s
+.PHONY : src/ringbuffer.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -150,6 +174,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/ringbuffer.o"
+	@echo "... src/ringbuffer.i"
+	@echo "... src/ringbuffer.s"
 .PHONY : help
 
 

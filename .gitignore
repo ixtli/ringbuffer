@@ -4,3 +4,5 @@ CMakeFiles/
 *.cmake
 ringbuffer
 *.swp
+*.pyc
+/tags
