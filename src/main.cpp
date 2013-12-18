@@ -1,10 +1,10 @@
 #include <iostream>
 #include <random>
-#include <atomic>
 #include <thread>
 #include <unistd.h>
+#include <cassert>
 
-#include "linkedlist.h"
+#include "ringbuffer.h"
 
 #define LOOP_COUNT 50
 
@@ -16,7 +16,6 @@ void consume()
 	for (unsigned i = 0; i < LOOP_COUNT; i++)
 	{
 		usleep(dis(rnd));
-		printf("I'm awake.\n");
 	}
 }
 
@@ -28,19 +27,45 @@ void produce()
 	for (unsigned i = 0; i < LOOP_COUNT; i++)
 	{
 		usleep(dis(rnd));
-		printf("Producing.\n");
 	}
+}
+
+void testSingleElementQueue()
+{
+	RingBuffer<bool, 1> fifo;
+	
+	bool firstValue = true;
+	bool secondValue = false;
+	bool targetValue = !firstValue;
+
+	// init ok
+	assert(fifo.init());
+
+	// Test limits for a single element queue
+	assert(fifo.wasEmpty());
+	assert(fifo.push(firstValue));
+	assert(fifo.wasFull());
+	assert(!fifo.wasEmpty());
+	assert(!fifo.push(secondValue));
+	assert(fifo.pop(targetValue));
+	assert(!fifo.wasFull());
+	assert(targetValue == firstValue);
+}
+
+void testRemoveFromEmptyQueue()
+{
+	RingBuffer<double, 10> fifo;
+	assert(fifo.wasEmpty());
+	assert(!fifo.wasFull());
+	double val;
+	assert(!fifo.pop(val));
 }
 
 int main()
 {
-	std::thread consumer(consume);
-	std::thread producer(produce);
-	producer.join();
-	consumer.join();
 
-	LinkedList l;
-	l.init();
+	testSingleElementQueue();
+	testRemoveFromEmptyQueue();
 
 	return 0;
 }
