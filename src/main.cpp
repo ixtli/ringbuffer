@@ -6,6 +6,9 @@
 
 #include "ringbuffer.h"
 
+// mark variables unused when they are used specifically for testing
+#define _unused(x) ((void)x)
+
 #define LOOP_COUNT 50
 
 void consume()
@@ -50,6 +53,9 @@ void testSingleElementQueue()
 	assert(fifo.pop(targetValue));
 	assert(!fifo.wasFull());
 	assert(targetValue == firstValue);
+
+	_unused(secondValue);
+	_unused(targetValue);
 }
 
 void testRemoveFromEmptyQueue()
@@ -59,6 +65,7 @@ void testRemoveFromEmptyQueue()
 	assert(!fifo.wasFull());
 	double val;
 	assert(!fifo.pop(val));
+	_unused(val);
 }
 
 int main()
