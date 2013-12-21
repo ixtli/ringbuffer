@@ -9,7 +9,9 @@ class RingBuffer
 {
 	public:
 
-		// Denote capacity without actually using memory
+		// Denote capacity without actually using memory. Remember that our Full/Empty
+		// mode is to _always keep one slot open_! It simplifies a lot of the code so
+		// it's probably always best to keep T small.
 		enum { CAPACITY = Q_SIZE + 1 };
 
 		RingBuffer() : _tail(0), _head(0) {};
@@ -22,11 +24,14 @@ class RingBuffer
 		bool push(const T& item);
 		bool pop(T& item);
 
-		// Meta-information about the queue. These  functions require memory locking
+		// Meta-information about the queue. These functions require memory locking
 		// and unlocking so calling generally incurs the same overhead as the above
 		// mutators. To be used for testing and auditing.
 		bool wasEmpty() const;
 		bool wasFull() const;
+
+		// A convenience that's usually included in most example code that deals with
+		// C++11 memory ordering operations
 		bool isLockFree() const;
 
 	private:
@@ -36,7 +41,6 @@ class RingBuffer
 		std::atomic<size_t> _tail; // Input location
 		std::atomic<size_t> _head; // Output location
 		
-		// Remmber the capacity of the queue is actually SIZE + 1
 		T _array[CAPACITY];
 };
 
